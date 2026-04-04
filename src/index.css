@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  
+  --color-brand-bg: #121F17; /* Deep Forest Green */
+  --color-brand-ink: #F8F1E5; /* Warm Parchment */
+  --color-brand-accent: #E67E22; /* Sunset Orange */
+  --color-brand-muted: #6B7D73; /* Muted Leaf */
+  --color-brand-line: rgba(248, 241, 229, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-ink font-sans selection:bg-brand-ink selection:text-brand-bg;
+    cursor: none;
+  }
+
+  /* Noise Overlay */
+  body::after {
+    content: "";
+    @apply fixed inset-0 pointer-events-none z-[9999] opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .vertical-rail {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .grid-lines {
+    background-size: 100px 100px;
+    background-image: 
+      linear-gradient(to right, var(--color-brand-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-brand-line) 1px, transparent 1px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom Cursor Hide on Mobile */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+}
